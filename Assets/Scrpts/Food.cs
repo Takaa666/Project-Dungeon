@@ -7,5 +7,6 @@ public class Food : ScriptableObject
 {
     public string itemName;
     public Sprite icon;
+    public GameObject prefab; // The prefab to respawn
     public Bahan[] ingredients;
 }
