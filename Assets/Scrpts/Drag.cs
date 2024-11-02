@@ -8,6 +8,7 @@ public class Drag : MonoBehaviour
     public Bahan foodItem; // Objek FoodItem yang akan dipasang ke GameObject
     private Vector3 originalPosition;
     private bool isDragging;
+    private bool isOverContainer;
 
     private void Start()
     {
@@ -39,20 +40,28 @@ public class Drag : MonoBehaviour
     {
         isDragging = false;
 
-        // Tambahkan logika di sini jika ingin memeriksa posisi drop, 
-        // misalnya apakah objek ditempatkan di area tertentu atau wadah.
-        // Jika tidak ditempatkan di tempat yang valid, kembalikan ke posisi awal.
-        if (!IsValidDropPosition())
+        // Jika posisi drop tidak valid, kembalikan ke posisi awal.
+        if (!isOverContainer)
         {
             transform.position = originalPosition;
         }
     }
 
-    private bool IsValidDropPosition()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Logika untuk memeriksa apakah posisi drop valid.
-        // Misalnya: deteksi apakah objek berada di area tertentu atau dekat dengan wadah.
-        // Untuk sementara, kembalikan true untuk mengizinkan drop di mana saja.
-        return true;
+        // Jika objek memasuki area dengan tag "Container", set isOverContainer menjadi true
+        if (collision.CompareTag("Container"))
+        {
+            isOverContainer = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        // Jika objek keluar dari area dengan tag "Container", set isOverContainer menjadi false
+        if (collision.CompareTag("Container"))
+        {
+            isOverContainer = false;
+        }
     }
 }
