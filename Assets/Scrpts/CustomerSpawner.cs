@@ -1,11 +1,15 @@
 using System.Collections;
 using UnityEngine;
+using Fungus;
 
 public class CustomerSpawner : MonoBehaviour
 {
     public GameObject[] customerPrefabs; // Array of customer prefabs for variety
     public Transform[] spawnPoints;      // Specific spawn locations for customers
     public int maxCustomerSlots = 3;     // Maximum number of customer slots
+
+    public Flowchart fungusFlowchart;    // Reference to the Fungus Flowchart
+    public string spawnDialogBlockName = "CustomerSpawnDialog"; // Block name in Flowchart to display dialog
 
     private void Start()
     {
@@ -51,6 +55,12 @@ public class CustomerSpawner : MonoBehaviour
             // Instantiate the selected customer prefab and set its parent to the spawn point
             GameObject newCustomer = Instantiate(selectedCustomerPrefab, selectedSpawnPoint.position, Quaternion.identity);
             newCustomer.transform.SetParent(selectedSpawnPoint);
+
+            // Trigger Fungus dialog box when the customer is spawned
+            if (fungusFlowchart != null && !string.IsNullOrEmpty(spawnDialogBlockName))
+            {
+                fungusFlowchart.ExecuteBlock(spawnDialogBlockName);
+            }
         }
     }
 }
