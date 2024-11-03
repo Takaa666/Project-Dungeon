@@ -26,10 +26,11 @@ public class Container : MonoBehaviour
         CheckCombination();
     }
 
-    // Check if the ingredients match any combined food item
+    // Check if the ingredients match any combined food item or partially match any recipe
     private void CheckCombination()
     {
-        bool matchFound = false;
+        bool fullMatchFound = false;
+        bool partialMatchFound = false;
 
         foreach (Food combinedItem in allCombinedFoodItems)
         {
@@ -37,53 +38,29 @@ public class Container : MonoBehaviour
             {
                 CreateCombinedFood(combinedItem);
                 ClearContainer();
-                matchFound = true;
+                fullMatchFound = true;
                 break;
+            }
+            else if (IsPartialCombinationMatch(combinedItem.ingredients))
+            {
+                partialMatchFound = true;
             }
         }
 
-        if (!matchFound)
+        if (!fullMatchFound && !partialMatchFound)
         {
-            // Change the cauldron color to black to indicate failure
+            // No full or partial match found, indicating failure
             cauldronSpriteRenderer.color = Color.black;
             Debug.Log("Combination failed! The cauldron turned black.");
         }
         else
         {
-            // Reset the cauldron color (if needed)
+            // Either a full or partial match exists, reset cauldron color
             cauldronSpriteRenderer.color = Color.white;
         }
     }
 
-    // private void CheckCombinationManaPotion()
-    // {
-    //     bool matchFound = false;
-
-    //     foreach (ManaPotion manaPotion in manaPotions)
-    //     {
-    //         if (IsCombinationMatch(manaPotion.ingredients))
-    //         {
-    //             CreateCombinedManaPotion(manaPotion);
-    //             ClearContainer();
-    //             matchFound = true;
-    //             break;
-    //         }
-    //     }
-
-    //     if (!matchFound)
-    //     {
-    //         // Change the cauldron color to black to indicate failure
-    //         cauldronSpriteRenderer.color = Color.black;
-    //         Debug.Log("Combination failed! The cauldron turned black.");
-    //     }
-    //     else
-    //     {
-    //         // Reset the cauldron color (if needed)
-    //         cauldronSpriteRenderer.color = Color.white;
-    //     }
-    // }
-
-    // Check if the ingredients match the required ingredients
+    // Check if the ingredients fully match the required ingredients
     private bool IsCombinationMatch(Bahan[] requiredIngredients)
     {
         if (currentIngredients.Count != requiredIngredients.Length) return false;
@@ -99,13 +76,29 @@ public class Container : MonoBehaviour
         return true;
     }
 
+    // Check if the current ingredients partially match the required ingredients
+    private bool IsPartialCombinationMatch(Bahan[] requiredIngredients)
+    {
+        // Convert the array to a list for easier comparison
+        List<Bahan> requiredIngredientsList = new List<Bahan>(requiredIngredients);
+
+        foreach (Bahan ingredient in currentIngredients)
+        {
+            if (!requiredIngredientsList.Contains(ingredient))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     // Create the combined food item
     private void CreateCombinedFood(Food combinedItem)
     {
         Debug.Log("Combined food created: " + combinedItem.itemName);
         // Additional logic for showing the combined food in UI or inventory
     }
-    
 
     // Clear the container after creating a combined food item
     private void ClearContainer()

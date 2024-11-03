@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 1454296141888615049}
   - component: {fileID: 284725654964890168}
   - component: {fileID: 8639480337493032250}
-  - component: {fileID: 3336056498117685919}
+  - component: {fileID: 3283016736626168505}
   m_Layer: 0
-  m_Name: Jamur Merah
+  m_Name: Bunga Biru
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
-  m_Sprite: {fileID: 21300000, guid: edf2fc4a8e500e148b93c3d244dcdbac, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b950839288624614aac1581c5fbc761a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -159,7 +159,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.492779, y: 6.400727}
   m_EdgeRadius: 0
---- !u!114 &3336056498117685919
+--- !u!114 &3283016736626168505
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,11 +168,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8245832828543546108}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae338097321609446a04b41644def6a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 967fb7ef7251dbf4e8ba1c84c9e9dbd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JamurMerahHalusPrefab: {fileID: 4704826358259812763, guid: 506270b9adaef704893014c1042bbdd3, type: 3}
-  JamurMerahHalusTag: JamurMerahHalus
+  BungaBiruHalusPrefab: {fileID: 4704826358259812763, guid: d2064992cd873344a8a14b00b1476db5, type: 3}
+  BungaBiruHalusTag: BungaBiruHalus
   clickCount: 0
   spawnX: -5.88
   spawnY: -4.41

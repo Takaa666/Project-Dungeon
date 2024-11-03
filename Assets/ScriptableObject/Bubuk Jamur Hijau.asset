@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f635ea3da80abba42a6154a409ef30f6, type: 3}
-  m_Name: Jamur Biru
+  m_Name: Bubuk Jamur Hijau
   m_EditorClassIdentifier: 
-  itemName: Jamur Biru
-  icon: {fileID: 21300000, guid: 1d93b7ab2b1ce8547bae77821af9efe1, type: 3}
+  itemName: Bubuk Jamur Hijau
+  icon: {fileID: 21300000, guid: 9e720a385284d3f48b80d03ff127616d, type: 3}
   isCooked: 0
-  prefab: {fileID: 384533056947415976, guid: 79ae72a8cfb466d4c84381b1d4e6893c, type: 3}
+  prefab: {fileID: 4704826358259812763, guid: d50948a79860cc74f81f13fd6796092b, type: 3}
