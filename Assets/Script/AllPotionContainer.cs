@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ManaPotionContainer : MonoBehaviour
+public class AllPotionContainer : MonoBehaviour
 {
     public SpriteRenderer cauldronSpriteRenderer; // Reference to the SpriteRenderer to change the color
     public List<Bahan> currentIngredients = new List<Bahan>(); // List of ingredients in the container
-    public ManaPotion[] manaPotions;
-    public GameObject potionPrefab; // Prefab of the potion to spawn when created
-    public Vector3 potionSpawnPosition; // Position to spawn the created potion
+    public Potion[] allPotions; // Array of all potion ScriptableObjects
+    public Transform potionSpawnPoint; // Transform to define where the potion spawns
 
     private bool potionCreated = false; // Tracks if a potion has been created
+    private Potion createdPotion; // Tracks the created potion to spawn its prefab
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -30,16 +30,17 @@ public class ManaPotionContainer : MonoBehaviour
         CheckCombination();
     }
 
-    // Check if the ingredients match any combined food item
+    // Check if the ingredients match any combined potion recipe
     private void CheckCombination()
     {
         bool matchFound = false;
 
-        foreach (ManaPotion manaPotion in manaPotions)
+        foreach (Potion potion in allPotions)
         {
-            if (IsCombinationMatch(manaPotion.ingredients))
+            if (IsCombinationMatch(potion.ingredients))
             {
-                CreateManaPotion(manaPotion);
+                createdPotion = potion; // Store the created potion
+                CreatePotion(potion);
                 ClearContainer();
                 matchFound = true;
                 potionCreated = true; // Mark that a potion has been created
@@ -47,14 +48,12 @@ public class ManaPotionContainer : MonoBehaviour
             }
         }
 
-        // Only turn black if no match is found and the number of ingredients matches the length of any recipe
         if (!matchFound)
         {
             bool lengthMatchFound = false;
-            foreach (ManaPotion manaPotion in manaPotions)
+            foreach (Potion potion in allPotions)
             {
-                // Check if the number of ingredients matches a recipe length
-                if (currentIngredients.Count == manaPotion.ingredients.Length)
+                if (currentIngredients.Count == potion.ingredients.Length)
                 {
                     lengthMatchFound = true;
                     break;
@@ -63,24 +62,21 @@ public class ManaPotionContainer : MonoBehaviour
 
             if (lengthMatchFound)
             {
-                // If the ingredients match the length of a recipe but don't form a correct combination, indicate failure
                 cauldronSpriteRenderer.color = Color.black;
                 Debug.Log("Combination failed! The cauldron turned black.");
             }
             else
             {
-                // Reset to white if no recipe length is matched, meaning more ingredients may be needed
                 cauldronSpriteRenderer.color = Color.white;
             }
         }
         else
         {
-            // Reset the cauldron color to indicate success
             cauldronSpriteRenderer.color = Color.white;
         }
     }
 
-    // Check if the ingredients match the required ingredients
+    // Check if the ingredients match the required ingredients for a potion
     private bool IsCombinationMatch(Bahan[] requiredIngredients)
     {
         if (currentIngredients.Count != requiredIngredients.Length)
@@ -99,10 +95,10 @@ public class ManaPotionContainer : MonoBehaviour
         return true;
     }
 
-    // Create the combined mana potion
-    private void CreateManaPotion(ManaPotion manaPotion)
+    // Create the specified potion
+    private void CreatePotion(Potion potion)
     {
-        Debug.Log("Mana Potion created: " + manaPotion.name);
+        Debug.Log("Potion created: " + potion.potionName);
     }
 
     // Clear the container
@@ -113,7 +109,6 @@ public class ManaPotionContainer : MonoBehaviour
 
     private void Update()
     {
-        // Detect if the container is clicked after creating a potion
         if (potionCreated && Input.GetMouseButtonDown(0))
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -127,17 +122,17 @@ public class ManaPotionContainer : MonoBehaviour
         }
     }
 
-    // Spawn the potion at a specified location
+    // Spawn the potion at the specified transform position
     private void SpawnPotion()
     {
-        if (potionPrefab != null)
+        if (createdPotion != null && createdPotion.potionPrefab != null)
         {
-            Instantiate(potionPrefab, potionSpawnPosition, Quaternion.identity);
-            Debug.Log("Potion spawned at position: " + potionSpawnPosition);
+            Instantiate(createdPotion.potionPrefab, potionSpawnPoint.position, potionSpawnPoint.rotation);
+            Debug.Log("Potion spawned: " + createdPotion.potionName + " at position: " + potionSpawnPoint.position);
         }
         else
         {
-            Debug.LogWarning("Potion prefab is not assigned!");
+            Debug.LogWarning("No potion prefab assigned for the created potion!");
         }
     }
 }

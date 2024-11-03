@@ -3,19 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Laser
-  - Enemy
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Meja
+  - 
   - Water
   - UI
-  - Object
-  - Karakter
-  - Background
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -42,19 +40,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Background
-    uniqueID: 2377311791
-    locked: 0
-  - name: Karakter
-    uniqueID: 3298198523
-    locked: 0
-  - name: Object
-    uniqueID: 1943913349
-    locked: 0
-  - name: Meja
-    uniqueID: 3815880203
-    locked: 0
-  - name: UI
-    uniqueID: 448603093
     locked: 0

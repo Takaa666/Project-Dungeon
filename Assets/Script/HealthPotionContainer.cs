@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ManaPotionContainer : MonoBehaviour
+public class HealthPotionContainer : MonoBehaviour
 {
     public SpriteRenderer cauldronSpriteRenderer; // Reference to the SpriteRenderer to change the color
     public List<Bahan> currentIngredients = new List<Bahan>(); // List of ingredients in the container
-    public ManaPotion[] manaPotions;
+    public HealthPotion[] healthPotions; // Array of HealthPotion to check combinations
     public GameObject potionPrefab; // Prefab of the potion to spawn when created
     public Vector3 potionSpawnPosition; // Position to spawn the created potion
 
@@ -35,11 +35,11 @@ public class ManaPotionContainer : MonoBehaviour
     {
         bool matchFound = false;
 
-        foreach (ManaPotion manaPotion in manaPotions)
+        foreach (HealthPotion healthPotion in healthPotions)
         {
-            if (IsCombinationMatch(manaPotion.ingredients))
+            if (IsCombinationMatch(healthPotion.ingredients))
             {
-                CreateManaPotion(manaPotion);
+                CreateHealthPotion(healthPotion);
                 ClearContainer();
                 matchFound = true;
                 potionCreated = true; // Mark that a potion has been created
@@ -47,35 +47,15 @@ public class ManaPotionContainer : MonoBehaviour
             }
         }
 
-        // Only turn black if no match is found and the number of ingredients matches the length of any recipe
         if (!matchFound)
         {
-            bool lengthMatchFound = false;
-            foreach (ManaPotion manaPotion in manaPotions)
-            {
-                // Check if the number of ingredients matches a recipe length
-                if (currentIngredients.Count == manaPotion.ingredients.Length)
-                {
-                    lengthMatchFound = true;
-                    break;
-                }
-            }
-
-            if (lengthMatchFound)
-            {
-                // If the ingredients match the length of a recipe but don't form a correct combination, indicate failure
-                cauldronSpriteRenderer.color = Color.black;
-                Debug.Log("Combination failed! The cauldron turned black.");
-            }
-            else
-            {
-                // Reset to white if no recipe length is matched, meaning more ingredients may be needed
-                cauldronSpriteRenderer.color = Color.white;
-            }
+            // Change the cauldron color to black to indicate failure
+            cauldronSpriteRenderer.color = Color.black;
+            Debug.Log("Combination failed! The cauldron turned black.");
         }
         else
         {
-            // Reset the cauldron color to indicate success
+            // Reset the cauldron color (if needed)
             cauldronSpriteRenderer.color = Color.white;
         }
     }
@@ -99,10 +79,10 @@ public class ManaPotionContainer : MonoBehaviour
         return true;
     }
 
-    // Create the combined mana potion
-    private void CreateManaPotion(ManaPotion manaPotion)
+    // Create the combined health potion
+    private void CreateHealthPotion(HealthPotion healthPotion)
     {
-        Debug.Log("Mana Potion created: " + manaPotion.name);
+        Debug.Log("Health Potion created: " + healthPotion.name);
     }
 
     // Clear the container

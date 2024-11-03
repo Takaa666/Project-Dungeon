@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8639480337493032250}
   - component: {fileID: 3336056498117685919}
   m_Layer: 0
-  m_Name: Jamur Merah
+  m_Name: Taring Orc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
-  m_Sprite: {fileID: 21300000, guid: edf2fc4a8e500e148b93c3d244dcdbac, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 68fb9659f4481e5418f7698c92645151, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -171,8 +171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae338097321609446a04b41644def6a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JamurMerahHalusPrefab: {fileID: 4704826358259812763, guid: 506270b9adaef704893014c1042bbdd3, type: 3}
-  JamurMerahHalusTag: JamurMerahHalus
+  JamurMerahHalusPrefab: {fileID: 4704826358259812763, guid: 2a4cd8b7d51a41248af8742fe47ece6e, type: 3}
+  JamurMerahHalusTag: Bubuk Taring Orc
   clickCount: 0
   spawnX: -5.88
   spawnY: -4.41
