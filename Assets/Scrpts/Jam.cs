@@ -5,12 +5,11 @@ using UnityEngine.UI;
 
 public class Jam : MonoBehaviour
 {
-    public int hour = 8;   // Jam mulai
-    public int minute = 0; // Menit mulai
-    public int second = 0; // Detik mulai
-
-    public float timeSpeed = 1f; // Kecepatan waktu (1f untuk waktu asli, angka lebih tinggi untuk lebih cepat)
-    public Text clockText;       // UI teks untuk jam
+    public int hour = 8;          // Jam mulai
+    public int minute = 0;        // Menit tetap di 0
+    public float timeSpeed = 1f;  // Kecepatan waktu (20 detik per jam)
+    public Text clockText;        // UI teks untuk jam
+    public GameObject gameOverPopup; // Popup game over
 
     private float elapsedTime = 0f;
 
@@ -19,31 +18,22 @@ public class Jam : MonoBehaviour
         // Tambahkan waktu sesuai kecepatan
         elapsedTime += Time.deltaTime * timeSpeed;
 
-        // Setiap satu detik berlalu
-        if (elapsedTime >= 1f)
+        // Setiap 20 detik berlalu, tambahkan jam
+        if (elapsedTime >= 20f)
         {
             elapsedTime = 0f;
-            second++;
+            hour++;
 
-            if (second >= 60)
+            // Jika waktu mencapai 22:00, tampilkan popup game over
+            if (hour >= 22)
             {
-                second = 0;
-                minute++;
-
-                if (minute >= 60)
-                {
-                    minute = 0;
-                    hour++;
-
-                    if (hour >= 24)
-                    {
-                        hour = 0; // Reset ke tengah malam
-                    }
-                }
+                hour = 22;
+                gameOverPopup.SetActive(true); // Aktifkan popup game over
+                enabled = false;               // Hentikan skrip
             }
         }
 
-        // Tampilkan waktu
-        clockText.text = string.Format("{0:D2}:{1:D2}:{2:D2}", hour, minute, second);
+        // Tampilkan waktu (format hanya jam dan menit)
+        clockText.text = string.Format("{0:D2}:{1:D2}", hour, minute);
     }
 }
