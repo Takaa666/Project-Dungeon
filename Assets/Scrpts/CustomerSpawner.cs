@@ -8,7 +8,6 @@ public class CustomerSpawner : MonoBehaviour
     public Transform[] spawnPoints;      // Specific spawn locations for customers
     public int maxCustomerSlots = 3;     // Maximum number of customer slots
 
-    public Flowchart fungusFlowchart;    // Reference to the Fungus Flowchart
     public string spawnDialogBlockName = "CustomerSpawnDialog"; // Block name in Flowchart to display dialog
 
     private void Start()
@@ -57,10 +56,7 @@ public class CustomerSpawner : MonoBehaviour
             newCustomer.transform.SetParent(selectedSpawnPoint);
 
             // Trigger Fungus dialog box when the customer is spawned
-            if (fungusFlowchart != null && !string.IsNullOrEmpty(spawnDialogBlockName))
-            {
-                fungusFlowchart.ExecuteBlock(spawnDialogBlockName);
-            }
+            
         }
     }
 }

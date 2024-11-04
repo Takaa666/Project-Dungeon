@@ -1,12 +1,12 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class DragMakanan : MonoBehaviour
 {
-    public Food food;
-    public HoverInfoPopup hoverInfoPopup;  // Reference to the HoverInfoPopup script
+    public Potion potion; // Change to Potion
+    public HoverInfoPopup hoverInfoPopup;
 
     private Vector3 originalPosition;
     private bool isDragging;
@@ -14,28 +14,26 @@ public class DragMakanan : MonoBehaviour
 
     private void Start()
     {
-        if (food != null)
+        if (potion != null)
         {
-            // Set sprite of GameObject based on the Food's icon
-            GetComponent<SpriteRenderer>().sprite = food.icon;
+            // Set sprite of GameObject based on the Potion's icon
+            GetComponent<SpriteRenderer>().sprite = potion.icon; // Ensure Potion has an icon property
         }
     }
 
     private void OnMouseEnter()
     {
         isMouseOver = true;
-        // Show popup only if not dragging
-        if (hoverInfoPopup != null && food != null && !isDragging)
+        if (hoverInfoPopup != null && potion != null && !isDragging)
         {
             Vector3 worldPosition = transform.position;
-            hoverInfoPopup.ShowPopup(food, worldPosition);
+            hoverInfoPopup.ShowPopup(potion, worldPosition); // Update to show potion info
         }
     }
 
     private void OnMouseExit()
     {
         isMouseOver = false;
-        // Hide popup when mouse exits the object
         if (hoverInfoPopup != null)
         {
             hoverInfoPopup.HidePopup();
@@ -44,7 +42,6 @@ public class DragMakanan : MonoBehaviour
 
     private void OnMouseDown()
     {
-        // Hide popup when starting to drag
         if (hoverInfoPopup != null)
         {
             hoverInfoPopup.HidePopup();
@@ -67,14 +64,12 @@ public class DragMakanan : MonoBehaviour
     {
         isDragging = false;
 
-        // Show popup again if mouse is still over the object after releasing
         if (isMouseOver && hoverInfoPopup != null)
         {
             Vector3 worldPosition = transform.position;
-            hoverInfoPopup.ShowPopup(food, worldPosition);
+            hoverInfoPopup.ShowPopup(potion, worldPosition); // Update to show potion info
         }
 
-        // Return to original position if dropped in invalid area
         if (!IsValidDropPosition())
         {
             transform.position = originalPosition;
@@ -83,6 +78,7 @@ public class DragMakanan : MonoBehaviour
 
     private bool IsValidDropPosition()
     {
-        return true;
+        return true; // Implement your logic for valid drop positions if needed
     }
 }
+*/

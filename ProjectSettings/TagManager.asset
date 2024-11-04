@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Container
+  - Cobek
+  - JamurMerahHalus
+  - M
+  - Potion
   layers:
   - Default
   - TransparentFX
@@ -40,4 +45,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 4214825449
+    locked: 0
+  - name: Karakter
+    uniqueID: 1814692067
+    locked: 0
+  - name: Meja
+    uniqueID: 2885273931
+    locked: 0
+  - name: Object
+    uniqueID: 3152892471
+    locked: 0
+  - name: UI
+    uniqueID: 495695281
     locked: 0

@@ -2,28 +2,30 @@ using UnityEngine;
 
 public class Customer : MonoBehaviour
 {
-    public OrderList orderList; // Drag dan drop OrderList di sini
-    public Food currentOrder;
+    public OrderList orderList; // Drag and drop OrderList here
+    public Potion currentOrder; // Change to Potion
+    
 
     void GenerateRandomOrder()
     {
         if (orderList.availableOrders.Length > 0)
         {
-            // Ambil pesanan secara acak dari daftar CombinedFoodItem
+            // Pick a random order from the list of available potions
             int randomIndex = Random.Range(0, orderList.availableOrders.Length);
             currentOrder = orderList.availableOrders[randomIndex];
 
-            // Tampilkan pesanan ini ke UI atau teks
+            // Display this order in the UI or text
             DisplayOrder(currentOrder);
         }
     }
 
-    public bool CheckOrder(Food servedItem)
+    public bool CheckOrder(Potion servedPotion) // Change parameter to Potion
     {
-        if (servedItem == currentOrder)
+        if (servedPotion == currentOrder)
         {
             Debug.Log("Correct Order! Customer is happy.");
             Destroy(gameObject);
+            
             return true;
         }
         else
@@ -33,24 +35,27 @@ public class Customer : MonoBehaviour
         }
     }
 
-    void DisplayOrder(Food order)
+    void DisplayOrder(Potion order) // Change parameter to Potion
     {
-        // Misalnya, tampilkan nama dan gambar hidangan di UI
-        Debug.Log("Customer ordered: " + order.itemName);
+        // Example: display the name and image of the potion in the UI
+        Debug.Log("Customer ordered: " + order.name);
     }
 
-    // Anda bisa memanggil fungsi ini setiap kali customer baru muncul
     void Start()
     {
-        GenerateRandomOrder();
+        //GenerateRandomOrder();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        DragMakanan dragMakanan = collision.GetComponent<DragMakanan>();
-        if (dragMakanan != null && dragMakanan.food == currentOrder)
+        DragPotion dragMakanan = collision.GetComponent<DragPotion>();
+        if (dragMakanan != null && dragMakanan.potion == currentOrder) // Change to potion
         {
-            CheckOrder(dragMakanan.food);
+            CheckOrder(dragMakanan.potion); // Change to potion
+        }
+        if(collision.tag == "Potion")
+        {
+            Destroy(collision.gameObject);
         }
     }
 }

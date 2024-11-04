@@ -13,5 +13,9 @@ MonoBehaviour:
   m_Name: Order List
   m_EditorClassIdentifier: 
   availableOrders:
-  - {fileID: 11400000, guid: bba4366bf59995547ac14797bb9582c4, type: 2}
-  - {fileID: 11400000, guid: 46bd1c3eed198d14bb4ea8f93be42f28, type: 2}
+  - {fileID: 11400000, guid: c8c7767a51cfd7d478f1b749db03b576, type: 2}
+  - {fileID: 11400000, guid: 80719ea3b17fdec409825ee163309a34, type: 2}
+  - {fileID: 11400000, guid: 2c64587beb1d1ac45b7f45a0df1602c4, type: 2}
+  - {fileID: 11400000, guid: ddec0e51f7aee9548bfa9fb5fdbdaf10, type: 2}
+  - {fileID: 11400000, guid: a449082de550832429efa865a21db41c, type: 2}
+  - {fileID: 11400000, guid: abc4bf0e562679b4bbda8e6d08f15304, type: 2}

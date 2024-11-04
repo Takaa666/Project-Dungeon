@@ -10,6 +10,7 @@ public class AllPotionContainer : MonoBehaviour
     public Transform potionSpawnPoint; // Transform to define where the potion spawns
 
     private bool potionCreated = false; // Tracks if a potion has been created
+    private bool combinationFailed = false; // Tracks if the combination has failed
     private Potion createdPotion; // Tracks the created potion to spawn its prefab
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -44,6 +45,7 @@ public class AllPotionContainer : MonoBehaviour
                 ClearContainer();
                 matchFound = true;
                 potionCreated = true; // Mark that a potion has been created
+                cauldronSpriteRenderer.color = Color.magenta; // Change to purple on success
                 break;
             }
         }
@@ -63,16 +65,13 @@ public class AllPotionContainer : MonoBehaviour
             if (lengthMatchFound)
             {
                 cauldronSpriteRenderer.color = Color.black;
+                combinationFailed = true; // Mark that the combination failed
                 Debug.Log("Combination failed! The cauldron turned black.");
             }
             else
             {
-                cauldronSpriteRenderer.color = Color.white;
+                cauldronSpriteRenderer.color = Color.white; // Reset to default if no match
             }
-        }
-        else
-        {
-            cauldronSpriteRenderer.color = Color.white;
         }
     }
 
@@ -105,6 +104,8 @@ public class AllPotionContainer : MonoBehaviour
     private void ClearContainer()
     {
         currentIngredients.Clear();
+        combinationFailed = false; // Reset the failure flag
+        cauldronSpriteRenderer.color = Color.white; // Reset cauldron color to normal
     }
 
     private void Update()
@@ -118,6 +119,19 @@ public class AllPotionContainer : MonoBehaviour
             {
                 SpawnPotion();
                 potionCreated = false; // Reset the potion creation flag
+                cauldronSpriteRenderer.color = Color.white; // Reset cauldron color to normal after potion pickup
+            }
+        }
+
+        if (combinationFailed && Input.GetMouseButtonDown(0))
+        {
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Collider2D collider = Physics2D.OverlapPoint(mousePosition);
+
+            if (collider != null && collider.gameObject == gameObject)
+            {
+                ClearContainer(); // Clear ingredients and reset color
+                Debug.Log("Failed combination cleared. The cauldron color reset to normal.");
             }
         }
     }
@@ -127,8 +141,17 @@ public class AllPotionContainer : MonoBehaviour
     {
         if (createdPotion != null && createdPotion.potionPrefab != null)
         {
-            Instantiate(createdPotion.potionPrefab, potionSpawnPoint.position, potionSpawnPoint.rotation);
-            Debug.Log("Potion spawned: " + createdPotion.potionName + " at position: " + potionSpawnPoint.position);
+            Instantiate(
+                createdPotion.potionPrefab,
+                potionSpawnPoint.position,
+                potionSpawnPoint.rotation
+            );
+            Debug.Log(
+                "Potion spawned: "
+                    + createdPotion.potionName
+                    + " at position: "
+                    + potionSpawnPoint.position
+            );
         }
         else
         {

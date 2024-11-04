@@ -17,4 +17,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4d55b70968285e34896d41659de71ddf, type: 2}
   - {fileID: 11400000, guid: 355d05769f3bb834988eaf925c0e790e, type: 2}
   - {fileID: 11400000, guid: cc3e49eaca76e7340894a7e9fe8ffaac, type: 2}
-  potionPrefab: {fileID: 8245832828543546108, guid: 7ab1a963501c29e479b471a7d42df57c, type: 3}
+  potionPrefab: {fileID: 5587472813122482084, guid: 2b2b443718ba79642908526f7d868587, type: 3}

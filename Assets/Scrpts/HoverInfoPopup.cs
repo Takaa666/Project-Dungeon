@@ -19,10 +19,10 @@ public class HoverInfoPopup : MonoBehaviour
         canvas = popupUI.GetComponentInParent<Canvas>();
     }
 
-    public void ShowPopup(Food food, Vector3 worldPosition)
+    public void ShowPopup(Potion food, Vector3 worldPosition)
     {
         // Set text and icon based on the Food object
-        itemNameText.text = food.itemName;
+        itemNameText.text = food.potionName;
 
         // Convert world position to screen position
         Vector3 screenPosition = Camera.main.WorldToScreenPoint(worldPosition);

@@ -5,6 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Order List", menuName = "Food Prep/Order List")]
 public class OrderList : ScriptableObject
 {
-    public Food[] availableOrders;
+    public Potion[] availableOrders;
 
 }
